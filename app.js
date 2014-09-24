@@ -1,1 +1,1 @@
-var movieTime = angular.module('movieTime', []);
+var movieTime = angular.module('movieTime', ['ngRoute']);
