@@ -1,0 +1,1 @@
+var movieTime = angular.module('movieTime', []);
