@@ -6,36 +6,35 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-<div class="container" ng-controller="MoviesCtrl">
-<div class="row">
-	<div class="col-md-12">
-		<h4>Search Movies</h4>
-		<form class="form-inline" role="form">
-			<div class="form-group">
-				<input ng-model="query" type="text" class="form-control" id="movie-name" placeholder="Search">
+	<div class="container" ng-controller="MoviesCtrl">
+		<div class="row" ng-show="movies.length">
+			<div class="col-md-12">
+				<h4>Search Movies</h4>
+				<form class="form-inline" role="form">
+					<div class="form-group">
+						<input ng-model="query" type="text" class="form-control" id="movie-title" placeholder="Search">
+					</div>
+				</form>
 			</div>
-		</form>
-	</div>
-</div>
-	<div class="row">
-		<div class="col-md-12">
-			<h2>Movie List</h2>
 		</div>
-		<div class="col-md-12">
-			<ul>
-				<li ng-repeat="movie in movies | filter:query">
-					<span ng-hide="editing" ng-click="editing = true">
-						{{movie.title}} <a ng-click="deleteMovie(movie)">Delete</a>
-					</span>
-				<span class="form-group" ng-show="editing" ng-submit="editing = false">
-					<form class="form-inline" role="form">
-						<input type="text" class="form-control input-sm" ng-model="movie.title" placeholder="Title" required/>
-						<button class="btn btn-default btn-sm" type="submit">Save</button>
-					</form>
-				</span>
-				</li>
-			</ul>
-		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<h2 ng-show="movies.length && filtered.length">Movie List</h2>
+				<h2 ng-show="movies.length && !filtered.length">No Matches</h2>
+				<ul>
+					<li ng-repeat="movie in filtered = (movies | filter:query)">
+						<span ng-click="editing = true" ng-hide="editing">
+							{{movie.title}} <a ng-click="deleteMovie(movie)">Delete</a>
+						</span>
+						<span class="form-group" ng-show="editing" ng-submit="editing = false">
+							<form class="form-inline" role="form">
+								<input type="text" class="form-control input-sm" ng-model="movie.title" placeholder="Title" required/>
+								<button class="btn btn-default btn-sm" type="submit">Save</button>
+							</form>
+						</span>
+					</li>
+				</ul>
+			</div>
 			<div class="col-md-4">
 				<h2>New Movie</h2>
 				<form ng-submit="addMovie()" class="form-inline" role="form">
