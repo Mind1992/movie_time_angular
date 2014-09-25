@@ -1,4 +1,4 @@
-var movieTime = angular.module('movieTime', ['ngRoute']);
+var movieTime = angular.module('movieTime', ['ngRoute','templates']);
 
 movieTime.config(function ($routeProvider) {
 	$routeProvider
